@@ -1,0 +1,2 @@
+python transcribe_audio.py -i "E:\mp3"
+python transcribe_audio.py -i  E:\DrugDev\NCT-App\audio-tools\mp3-test
