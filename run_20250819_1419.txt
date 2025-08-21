@@ -1,0 +1,255 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS E:\NCT-App\transcribe-audio> python .\transcribe_mp3_v2.py --root "../mp3-test" --model large --lang vi --ext ".mp3"--device cuda
+🎙️  Loading Whisper model: large (device=cuda)
+Traceback (most recent call last):
+  File "E:\NCT-App\transcribe-audio\transcribe_mp3_v2.py", line 289, in <module>
+    main()
+  File "E:\NCT-App\transcribe-audio\transcribe_mp3_v2.py", line 276, in main
+    transcribe_folder(
+  File "E:\NCT-App\transcribe-audio\transcribe_mp3_v2.py", line 167, in transcribe_folder
+    model = whisper.load_model(model_name, device=device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\__init__.py", line 151, in load_model
+    checkpoint = torch.load(fp, map_location=device, **kwargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 1516, in load
+    return _load(
+           ^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 2114, in _load
+    result = unpickler.load()
+             ^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\_weights_only_unpickler.py", line 532, in load
+    self.append(self.persistent_load(pid))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 2078, in persistent_load
+    typed_storage = load_tensor(
+                    ^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 2044, in load_tensor
+    wrap_storage = restore_location(storage, location)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 1854, in restore_location
+    return default_restore_location(storage, map_location)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 698, indefault_restore_location
+    result = fn(storage, location)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 636, in_deserialize
+    device = _validate_device(location, backend_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 605, in_validate_device
+    raise RuntimeError(
+RuntimeError: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. If you are running on a CPU-only machine, please use torch.load with map_location=torch.device('cpu') to map your storages to the CPU.
+PS E:\NCT-App\transcribe-audio>
+PS E:\NCT-App\transcribe-audio> pip uninstall -y torch torchvision torchaudio
+Found existing installation: torch 2.7.1
+Uninstalling torch-2.7.1:
+  Successfully uninstalled torch-2.7.1
+Found existing installation: torchvision 0.22.1
+Uninstalling torchvision-0.22.1:
+  Successfully uninstalled torchvision-0.22.1
+Found existing installation: torchaudio 2.7.1
+Uninstalling torchaudio-2.7.1:
+  Successfully uninstalled torchaudio-2.7.1
+PS E:\NCT-App\transcribe-audio> pip install --upgrade --index-url https://download.pytorch.org/whl/cu121 torch torchvision torchaudio
+Looking in indexes: https://download.pytorch.org/whl/cu121
+Collecting torch
+  Downloading https://download.pytorch.org/whl/cu121/torch-2.5.1%2Bcu121-cp312-cp312-win_amd64.whl (2449.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.4/2.4 GB 9.3 MB/s  0:04:12
+Collecting torchvision
+  Downloading https://download.pytorch.org/whl/cu121/torchvision-0.20.1%2Bcu121-cp312-cp312-win_amd64.whl (6.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.1/6.1 MB 10.6 MB/s  0:00:00
+Collecting torchaudio
+  Downloading https://download.pytorch.org/whl/cu121/torchaudio-2.5.1%2Bcu121-cp312-cp312-win_amd64.whl (4.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.1/4.1 MB 7.1 MB/s  0:00:00
+Requirement already satisfied: filelock in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (fromtorch) (3.16.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from torch) (4.12.2)
+Requirement already satisfied: networkx in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (fromtorch) (3.5)
+Requirement already satisfied: jinja2 in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from torch) (3.1.4)
+Requirement already satisfied: fsspec in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from torch) (2024.9.0)
+Requirement already satisfied: setuptools in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from torch) (80.9.0)
+Collecting sympy==1.13.1 (from torch)
+  Downloading https://download.pytorch.org/whl/sympy-1.13.1-py3-none-any.whl (6.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.2/6.2 MB 10.5 MB/s  0:00:00
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from sympy==1.13.1->torch) (1.3.0)
+Requirement already satisfied: numpy in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from torchvision) (1.26.4)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from torchvision) (10.4.0)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\users\nct\appdata\local\programs\python\python312\lib\site-packages (from jinja2->torch) (2.1.5)
+Installing collected packages: sympy, torch, torchvision, torchaudio
+  Attempting uninstall: sympy
+    Found existing installation: sympy 1.13.3
+    Uninstalling sympy-1.13.3:
+      Successfully uninstalled sympy-1.13.3
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0/4 [sympy]  WARNING: The script isympy.exe is installed in 'C:\Users\NCT\AppData\Local\Programs\Python\Python312\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1/4 [torch]  WARNING: The scripts convert-caffe2-to-onnx.exe, convert-onnx-to-caffe2.exe, torchfrtrace.exe and torchrun.exe are installed in 'C:\Users\NCT\AppData\Local\Programs\Python\Python312\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed sympy-1.13.1 torch-2.5.1+cu121 torchaudio-2.5.1+cu121 torchvision-0.20.1+cu121
+PS E:\NCT-App\transcribe-audio> code .
+PS E:\NCT-App\transcribe-audio> python .\cuda_test.py
+torch: 2.5.1+cu121
+cuda available: True
+cuda version (wheel): 12.1
+gpu: NVIDIA GeForce RTX 3060
+PS E:\NCT-App\transcribe-audio> python .\transcribe_mp3_v2.py --root "../mp3-test" --model large --lang vi --ext ".mp3"--device cuda
+🎙️  Loading Whisper model: large (device=cuda)
+✅ Registered PDF font: Arial
+📁 Root: E:\NCT-App\mp3-test
+
+===== SUMMARY =====
+Total audio files found: 0
+Skipped (processed):     0
+Skipped (existing out):  0
+Succeeded:               0
+Failed:                  0
+====================
+PS E:\NCT-App\transcribe-audio> python .\transcribe_mp3_v2.py --root "../mp3-test" --model large --lang vi --ext ".mp3"--device cuda
+🎙️  Loading Whisper model: large (device=cuda)
+✅ Registered PDF font: Arial
+📁 Root: E:\NCT-App\mp3-test
+
+===== SUMMARY =====
+Total audio files found: 0
+Skipped (processed):     0
+Skipped (existing out):  0
+Succeeded:               0
+Failed:                  0
+====================
+PS E:\NCT-App\transcribe-audio> Get-ChildItem -Recurse ..\mp3-test | Where-Object { $_.Extension -eq ".mp3" }
+PS E:\NCT-App\transcribe-audio> Get-ChildItem -Recurse ..\mp3-test | Where-Object { $_.Extension -eq ".mp3" }
+PS E:\NCT-App\transcribe-audio> Get-ChildItem -Recurse ..\mp3 | Where-Object { $_.Extension -eq ".mp3" }
+PS E:\NCT-App\transcribe-audio> Get-ChildItem -Recurse ..\mp3 | Where-Object { $_.Extension -eq ".mp3" }
+PS E:\NCT-App\transcribe-audio> python .\transcribe_mp3_v2.py --root "./mp3" --model large --lang vi --ext ".mp3" --device cuda
+🎙️  Loading Whisper model: large (device=cuda)
+✅ Registered PDF font: Arial
+📁 Root: E:\NCT-App\transcribe-audio\mp3
+
+🔄 [RUNNING] Trước Khi Ra Đường, Nhớ Việc Này Luôn Bình An May Mắn (ai cũng nên biết) - HT. Thích Trí Quảng [OR4BdpX_31Y].mp3
+⏱️  Start time: 2025-08-19 13:12:00
+❌ [ERROR] Trước Khi Ra Đường, Nhớ Việc Này Luôn Bình An May Mắn (ai cũng nên biết) - HT. Thích Trí Quảng [OR4BdpX_31Y].mp3: [WinError 2] The system cannot find the file specified
+
+🔄 [RUNNING] Tu Tập Tại Nhà Chỉ Cần Làm Tốt 3 VIỆC NÀY Công Đức Vô Lượng Vô Biên - HT. Thích Trí Quảng [IzETUc-bSmQ].mp3
+⏱️  Start time: 2025-08-19 13:12:00
+❌ [ERROR] Tu Tập Tại Nhà Chỉ Cần Làm Tốt 3 VIỆC NÀY Công Đức Vô Lượng Vô Biên - HT. Thích Trí Quảng [IzETUc-bSmQ].mp3:[WinError 2] The system cannot find the file specified
+
+🔄 [RUNNING] Tuổi 40,50,60 Nghiệp Nặng Đến Liên Tục NÊN LÀM GÌ ĐỂ HÓA GIẢI？ nghe ngay ｜ HT. Thích Trí Quảng [x1oc-gilJTc].mp3
+⏱️  Start time: 2025-08-19 13:12:00
+❌ [ERROR] Tuổi 40,50,60 Nghiệp Nặng Đến Liên Tục NÊN LÀM GÌ ĐỂ HÓA GIẢI？ nghe ngay ｜ HT. Thích Trí Quảng [x1oc-gilJTc].mp3: [WinError 2] The system cannot find the file specified
+
+🔄 [RUNNING] Tuổi Về Già Có 3 Thứ Này Là Có Tất Cả, Càng Sống Càng Hưởng Phúc - HT. Thích Trí Quảng [YA4VNDz0tPc].mp3
+⏱️  Start time: 2025-08-19 13:12:00
+❌ [ERROR] Tuổi Về Già Có 3 Thứ Này Là Có Tất Cả, Càng Sống Càng Hưởng Phúc - HT. Thích Trí Quảng [YA4VNDz0tPc].mp3: [WinError 2] The system cannot find the file specified
+
+🔄 [RUNNING] Tự Mình Hóa Giải NGHIỆP OAN GIA Trong Gia Đình (nên nghe 1 lần) - HT. Thích Trí Quảng [q1R4xZ_XwuE].mp3
+⏱️  Start time: 2025-08-19 13:12:00
+❌ [ERROR] Tự Mình Hóa Giải NGHIỆP OAN GIA Trong Gia Đình (nên nghe 1 lần) - HT. Thích Trí Quảng [q1R4xZ_XwuE].mp3: [WinError 2] The system cannot find the file specified
+
+🔄 [RUNNING] Vì Nghiệp Gì Anh Em Ruột Thịt OÁN HẬN LẪN NHAU (nghe để hóa giải) - HT. Thích Trí Quảng [6dMNUaHvrgo].mp3
+⏱️  Start time: 2025-08-19 13:12:00
+❌ [ERROR] Vì Nghiệp Gì Anh Em Ruột Thịt OÁN HẬN LẪN NHAU (nghe để hóa giải) - HT. Thích Trí Quảng [6dMNUaHvrgo].mp3: [WinError 2] The system cannot find the file specified
+
+🔄 [RUNNING] Vì Sao Khi CHẶT CÂY TO Dễ Gặp Tai Họa？ (nghe ngay kẻo muộn) - HT. Thích Trí Quảng [hLUSglRo2ZY].mp3
+⏱️  Start time: 2025-08-19 13:12:00
+❌ [ERROR] Vì Sao Khi CHẶT CÂY TO Dễ Gặp Tai Họa？ (nghe ngay kẻo muộn) - HT. Thích Trí Quảng [hLUSglRo2ZY].mp3: [WinError 2] The system cannot find the file specified
+
+===== SUMMARY =====
+Total audio files found: 7
+Skipped (processed):     0
+Skipped (existing out):  0
+Succeeded:               0
+Failed:                  7
+====================
+PS E:\NCT-App\transcribe-audio> python transcribe_audio_v1.py -i .\mp3 --ffmpeg "..\apps\ffmpeg\bin\ffmpeg.exe"
+🎵 Supported formats: .mp3, .m4a, .wav, .flac, .ogg, .aac, .wma, .webm
+📂 Input folder: E:\NCT-App\transcribe-audio\mp3
+🗃️ Logs saved in: E:\NCT-App\transcribe-audio\mp3
+❌ ffmpeg not found at: E:\NCT-App\apps\ffmpeg\bin\ffmpeg.exe
+PS E:\NCT-App\transcribe-audio> python transcribe_audio_v1.py -i .\mp3 --ffmpeg ".\apps\ffmpeg\bin\ffmpeg.exe"
+🎵 Supported formats: .mp3, .m4a, .wav, .flac, .ogg, .aac, .wma, .webm
+📂 Input folder: E:\NCT-App\transcribe-audio\mp3
+🗃️ Logs saved in: E:\NCT-App\transcribe-audio\mp3
+🎬 ffmpeg OK: ffmpeg version 2025-08-14-git-cdbb5f1b93-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+📁 Total audio files to process: 7
+
+🔄 [RUNNING] Trước Khi Ra Đường, Nhớ Việc Này Luôn Bình An May Mắn (ai cũng nên biết) - HT. Thích Trí Quảng [OR4BdpX_31Y].mp3
+⏱️  Start time: 2025-08-19 13:16:27
+✅ [DONE] Trước Khi Ra Đường, Nhớ Việc Này Luôn Bình An May Mắn (ai cũng nên biết) - HT. Thích Trí Quảng [OR4BdpX_31Y].mp3 in 1684.33 seconds
+🕒 End time: 2025-08-19 13:44:32
+
+
+🔄 [RUNNING] Tu Tập Tại Nhà Chỉ Cần Làm Tốt 3 VIỆC NÀY Công Đức Vô Lượng Vô Biên - HT. Thích Trí Quảng [IzETUc-bSmQ].mp3
+⏱️  Start time: 2025-08-19 13:44:32
+Traceback (most recent call last):
+  File "E:\NCT-App\transcribe-audio\transcribe_audio_v1.py", line 141, in <module>
+    result = model.transcribe(full_path, language=args.lang)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\transcribe.py", line 295, in transcribe
+    result: DecodingResult = decode_with_fallback(mel_segment)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\transcribe.py", line 201, in decode_with_fallback
+    decode_result = model.decode(segment, options)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\decoding.py", line 824, in decode
+    result = DecodingTask(model, options).run(mel)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\utils\_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\decoding.py", line 737, in run
+    tokens, sum_logprobs, no_speech_probs = self._main_loop(audio_features, tokens)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\decoding.py", line 687, in _main_loop
+    logits = self.inference.logits(tokens, audio_features)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\decoding.py", line 163, in logits
+    return self.model.decoder(tokens, audio_features, kv_cache=self.kv_cache)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\model.py", line 242, in forward
+    x = block(x, xa, mask=self.mask, kv_cache=kv_cache)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\whisper\model.py", line 168, in forward
+    if self.cross_attn:
+       ^^^^^^^^^^^^^^^
+  File "C:\Users\datbui\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py", line 1918, in __getattr__
+    def __getattr__(self, name: str) -> Any:
+
+KeyboardInterrupt
+PS E:\NCT-App\transcribe-audio>
+PS E:\NCT-App\transcribe-audio> python .\transcribe_audio_cuda_v2.py -i .\mp3 --ffmpeg "..\apps\ffmpeg\bin\ffmpeg.exe" --device cuda --model large
+C:\Users\datbui\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'E:\\NCT-App\\transcribe-audio\\transcribe_audio_cuda_v2.py': [Errno 2] No such file or directory
+PS E:\NCT-App\transcribe-audio> python .\transcribe_audio_cuda.py -i .\mp3 --ffmpeg "..\apps\ffmpeg\bin\ffmpeg.exe" --device cuda --model large
+🎵 Supported formats: .mp3, .m4a, .wav, .flac, .ogg, .aac, .wma, .webm
+📂 Input folder: E:\NCT-App\transcribe-audio\mp3
+🗃️ Logs saved in: E:\NCT-App\transcribe-audio\mp3
+❌ ffmpeg not found at: E:\NCT-App\apps\ffmpeg\bin\ffmpeg.exe
+PS E:\NCT-App\transcribe-audio> python .\transcribe_audio_cuda.py -i .\mp3 --ffmpeg ".\apps\ffmpeg\bin\ffmpeg.exe" --device cuda --model large
+🎵 Supported formats: .mp3, .m4a, .wav, .flac, .ogg, .aac, .wma, .webm
+📂 Input folder: E:\NCT-App\transcribe-audio\mp3
+🗃️ Logs saved in: E:\NCT-App\transcribe-audio\mp3
+🎬 ffmpeg OK: ffmpeg version 2025-08-14-git-cdbb5f1b93-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+🟢 Using CUDA: NVIDIA GeForce RTX 3060
+🧠 Loading Whisper model 'large' on device: cuda (fp16=True) ...
+📁 Total audio files found: 7
+⏩ Skip Trước Khi Ra Đường, Nhớ Việc Này Luôn Bình An May Mắn (ai cũng nên biết) - HT. Thích Trí Quảng [OR4BdpX_31Y].mp3 (already processed or outputs exist)
+
+🔄 [RUNNING] Tu Tập Tại Nhà Chỉ Cần Làm Tốt 3 VIỆC NÀY Công Đức Vô Lượng Vô Biên - HT. Thích Trí Quảng [IzETUc-bSmQ].mp3
+⏱️  Start time: 2025-08-19 14:19:51
+  0%|                                                                                   | 0/340495 [00:00<?, ?frames/s]
